@@ -18,15 +18,41 @@ data <- read.csv(file="https://onlinestatbook.com/case_studies_rvls/physical_str
 plot(SIMS~ARM,data=data)
 ```
 
-SIMS is on the y-axis and ARM is on the x-axis. This plot shows a positive linear correlation. The SIMS increase as does the size of the ARM.
-
 ##Now with ggplot - first select the basic data
 
 ```{r}
 basicNN <- ggplot(data,aes(y=SIMS,x=ARM))
 ```
+##Now add in scatterplot
+
 ```{r}
 basicNN + geom_point()
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+SIMS is on the y-axis and ARM is on the x-axis. This plot shows a positive linear correlation. The SIMS increase as does the size of the ARM.
+
+# Numerical results
+
+```{r}
+cor(SIMS~ARM,data=data)
+```
+
+The value is 0.68, which is a positive number. This indicates the line will travel upwards towards the right of the graph.
+
+# Inferential  (Build linear model)
+  
+```{r}
+model.1 <- lm(SIMS~ARM,data=data)
+summary.lm(model.1)
+```
+
+The equation that for the line that fits the graph is SIMS = -4.1 + .05 * ARM. The formula used y=mx+b to create the line. The Adjusted R-square is the number to look at when translating the metric.
+(y=SIMS),(m=-4.1),(x=ARM),(b=.05)
+
+# now add the model fit to our plot
+  
+```{r}
+basicNN + geom_point() + geom_smooth(method=lm)
+``` 
+
+It seems the value of (y-intercept)SIMS is just a little over 1.
