@@ -46,8 +46,11 @@ model.1 <- lm(SIMS~ARM,data=data)
 summary.lm(model.1)
 ```
 
-The equation that for the line that fits the graph is SIMS = -4.1 + .05 * ARM. The formula used y=mx+b to create the line. The Adjusted R-square is the number to look at when translating the metric.
+In this linear regression model, the numbers that should be considered are the estimated coefficients. The equation that for the line that fits the graph is SIMS = -4.1 + .05 * ARM. The formula used y=mx+b to create the line. The greater the value of the Adjusted R-squared, the better the model.
 (y=SIMS),(m=-4.1),(x=ARM),(b=.05)
+The 145 degrees of freedom are the data points displayed in these plots.
+The line is to be an estimate where it hits the y-axis. Each data will change the degree of freedom. The degrees of freedom will be taken from the multiple R-squared. The adjusted R-squared is the remainder of the multiple R-squared.In the Adjusted R-squared, the error was reduced by 46%(0.467).
+The Adjusted R-squared represents the reduction error from the mean on a percentage basis. Everytime you add more stuff to the model, the multiple R-squared reduce in a small percentage.
 
 # now add the model fit to our plot
   
@@ -56,3 +59,13 @@ basicNN + geom_point() + geom_smooth(method=lm)
 ``` 
 
 It seems the value of (y-intercept)SIMS is just a little over 1.
+
+```{r}
+newdata = data.frame(GRIP = 94,ARM = 88)
+predict(model.1, newdata, interval = "prediction")
+```
+This is a prediction interval, how far one point varies from the other points. If you take away 0.7 from 3.13, you end up with approximately 2.3.
+
+## Discussion and Prediction
+
+We read the data available and made a Git Repository. After having done so, we copied the raw data link to R. In doing so, we were able to view the data in R. We were able to assess the helper file needed as the numerical~numerical.We,then, copied and pasted the graphs, while maintaining the variables. We also translated the graphs.
