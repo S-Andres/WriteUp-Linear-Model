@@ -1,0 +1,32 @@
+---
+title: "Linear Model"
+author: "Sabrina A"
+date: "7/14/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+require(tidyverse)
+require(tigerstats)
+knitr::opts_chunk$set(echo = TRUE)
+data <- read.csv(file="https://onlinestatbook.com/case_studies_rvls/physical_strength/data.txt",sep="",header=TRUE) 
+```
+
+###Plot scatterplot
+
+```{r}
+plot(SIMS~ARM,data=data)
+```
+
+SIMS is on the y-axis and ARM is on the x-axis. This plot shows a positive linear correlation. The SIMS increase as does the size of the ARM.
+
+##Now with ggplot - first select the basic data
+
+```{r}
+basicNN <- ggplot(data,aes(y=SIMS,x=ARM))
+```
+```{r}
+basicNN + geom_point()
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
